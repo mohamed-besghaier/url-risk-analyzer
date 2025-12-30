@@ -1,6 +1,6 @@
 # URL Risk Analyzer
 
-Analyze URLs for potential security risks and explain why a URL is safe or not.
+Analyze URLs for potential security risks and explain why a URL is safe or unsafe.
 
 ## MVP Scope
 
