@@ -1,4 +1,5 @@
 import argparse
+import sys
 from engine import domain_checks, tls_checks, page_checks, score, explain
 
 def main():
@@ -11,7 +12,13 @@ def main():
     url = args.url
 
     # Call engine functions
-    domain_result = domain_checks.check_domain(url)
+
+    try :
+        domain_result = domain_checks.check_domain(url)
+    except :
+        parser.error("Domain was not found")
+        sys.exit()
+        
     tls_result = tls_checks.check_tls(url)
     page_result = page_checks.check_page(url)
     risk_score = score.calculate_score(domain_result, tls_result, page_result)
