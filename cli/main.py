@@ -2,7 +2,10 @@ import argparse
 from engine import domain_checks, tls_checks, page_checks, score, explain
 
 def main():
-    parser = argparse.ArgumentParser(description="ExplainRisk MVP CLI")
+    parser = argparse.ArgumentParser(prog="url-risk-analyzer",
+                                     description= "Analyze URLs for potential security risks and explain why a URL is safe or unsafe.",
+                                     usage='python -m cli.main url'
+                                     )
     parser.add_argument("url", help="URL to analyze")
     args = parser.parse_args()
     url = args.url
