@@ -1,5 +1,5 @@
 import argparse
-import sys
+import validators
 from engine import domain_checks, tls_checks, page_checks, score, explain
 
 def main():
@@ -7,17 +7,18 @@ def main():
                                      description= "Analyze URLs for potential security risks and explain why a URL is safe or unsafe.",
                                      usage='python -m cli.main url'
                                      )
-    parser.add_argument("url", help="URL to analyze")
+    parser.add_argument("url",
+                        help="The full URL to analyze. Example formats: http://www.example.com or https://example.com")
     args = parser.parse_args()
     url = args.url
 
-    # Call engine functions
+    if not validators.url(url):
+        parser.error(f"Invalid URL format: {url}")
 
-    try :
+    try:
         domain_result = domain_checks.check_domain(url)
-    except :
-        parser.error("Domain was not found")
-        sys.exit()
+    except Exception:
+        parser.error(f"Domain could not be found: {url}")
         
     tls_result = tls_checks.check_tls(url)
     page_result = page_checks.check_page(url)

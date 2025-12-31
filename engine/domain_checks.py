@@ -8,7 +8,6 @@ def check_object (object) :
     return object
 
 def check_domain(url):
-    # Placeholder for domain analysis
     # Returns a dictionary of findings
     
     info = whois.whois(url)
