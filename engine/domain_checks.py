@@ -7,9 +7,8 @@ def check_object (object) :
     
     return object
 
-def check_domain(url):
-    # Returns a dictionary of findings
-    
+# Return a dict of domain informations
+def check_domain(url) :
     info = whois.whois(url)
     domain_name = check_object (info.domain_name)
     creation_date = check_object (info.creation_date).date()
