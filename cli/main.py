@@ -13,15 +13,20 @@ def main():
     url = args.url
 
     if not validators.url(url):
-        parser.error(f"Invalid URL format: {url}")
+        parser.error(f"Invalid URL: {url}")
 
     try:
         domain_result = domain_checks.check_domain(url)
     except Exception:
-        parser.error(f"Domain could not be found: {url}")
+        parser.error(f"Domain could not be resolved: {url}")
+    
+    try :
+        page_result = page_checks.check_page(url)
+    except Exception:
+        parser.error(f"Unable to reach URL: {url}")
         
     tls_result = tls_checks.check_tls(url)
-    page_result = page_checks.check_page(url)
+    
     risk_score = score.calculate_score(domain_result, tls_result, page_result)
     explanation = explain.explain(
         {"domain": domain_result, "tls": tls_result, "page": page_result},
