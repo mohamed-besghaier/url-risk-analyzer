@@ -2,7 +2,15 @@ import argparse
 import validators
 from engine import domain_checks, tls_checks, page_checks, score, explain
 
+def print_banner():
+    print("""
+URL Risk Analyzer
+=================
+Analyze URLs for security risks
+""")
+
 def main():
+    print_banner()
     parser = argparse.ArgumentParser(prog="url-risk-analyzer",
                                      description= "Analyze URLs for potential security risks and explain why a URL is safe or unsafe.",
                                      usage='python -m cli.main url'
