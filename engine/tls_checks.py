@@ -41,19 +41,21 @@ def check_tls(url):
 
         if (now < valid_from or now > valid_to) :
             valid = False
+            
+        tls_present = True
+        if urlparse(url).scheme != "https" :
+            tls_present = False
 
         conn.close()
     
         return { 
             "valid": valid,
-            "issuer": issuer_org,
-            "valid_from": valid_from,
-            "valid_to": valid_to,
+            "tls_present": tls_present,
+            "issuer": issuer_org
         }
     except Exception :
         return {
             "valid": False,
-            "issuer": None,
-            "valid_from": None,
-            "valid_to": None,
+            "tls_present": None,
+            "issuer": None
         }
