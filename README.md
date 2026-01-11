@@ -20,7 +20,7 @@ A command-line security analysis tool that evaluates URLs for potential risks an
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
+git clone https://github.com/mohamed-besghaier/url-risk-analyzer.git
 cd url-risk-analyzer
 ```
 
