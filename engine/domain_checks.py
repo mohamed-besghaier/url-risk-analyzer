@@ -1,4 +1,5 @@
 import whois
+import tldextract
 from datetime import datetime
 
 def check_object (object) :
@@ -15,7 +16,17 @@ def check_domain(url) :
     registrar = info.registrar
     name_servers = check_object (info.name_servers)
     status = info.status
-    tld = domain_name[domain_name.find(".") + 1:]
+    tld = tldextract.extract(url).suffix
+    
+    FLAGS = ["clientDeleteProhibited", "serverDeleteProhibited", "clientTransferProhibited", "serverTransferProhibited"]
+    res_FLAGS = []
+
+    for st in status:
+        for flag in FLAGS:
+            if flag in st and flag not in res_FLAGS:
+                res_FLAGS.append(flag)
+        if len(res_FLAGS) == len(FLAGS):
+            break
 
     now = datetime.now().date()
     age_months = (now.year - creation_date.year) * 12 + now.month - creation_date.month
@@ -25,6 +36,6 @@ def check_domain(url) :
         "age_months" : age_months,
         "registrar" : registrar,
         "name_servers" : name_servers,
-        "status" : status,
+        "status" : res_FLAGS,
         "tld" : tld
     }
