@@ -22,9 +22,7 @@ def calculate_score(domain_result, tls_result, page_result):
     
     SAFE_TLDS = [".com", ".org", ".net", ".gov", ".edu",
                  ".mil", ".int", ".co", ".io", ".us", ".uk", ".ca", ".de", ".fr", ".jp", ".au", ".ch", ".nl", ".se"]
-    
-    FLAGS = ["clientDeleteProhibited", "serverDeleteProhibited", "clientTransferProhibited", "serverTransferProhibited"]
-    
+        
     score = 0
     
     # Scoring : domain
@@ -37,11 +35,7 @@ def calculate_score(domain_result, tls_result, page_result):
     if domain_result["tld"] in SAFE_TLDS :
         score += 10
     
-    for status in domain_result["status"] :
-        for flag in FLAGS[:]:
-            if flag in status:
-                score += 3.75
-                FLAGS.remove(flag)
+    score += len(domain_result["status"])*3.75
     
     # Scoring : tls
     if tls_result["valid"] :
