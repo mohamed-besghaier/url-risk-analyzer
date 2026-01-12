@@ -1,6 +1,7 @@
 import argparse
 import validators
 from engine import domain_checks, tls_checks, page_checks, score, explain
+from tabulate import tabulate
 
 def print_banner():
     print("""
@@ -8,6 +9,10 @@ URL Risk Analyzer
 =================
 Analyze URLs for security risks
 """)
+
+def print_dict_table (d) :
+    table = [[k, v] for k, v in d.items()]
+    print(tabulate(table, tablefmt="fancy_grid"))
 
 def main():
     print_banner()
@@ -43,9 +48,9 @@ def main():
 
     # Output
     print("Findings:")
-    print(domain_result)
-    print(tls_result)
-    print(page_result)
+    print_dict_table(domain_result)
+    print_dict_table(tls_result)
+    print_dict_table(page_result)
     print(explanation)
 
 if __name__ == "__main__":
