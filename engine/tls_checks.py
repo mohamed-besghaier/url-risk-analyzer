@@ -1,5 +1,6 @@
 import ssl
 import socket
+import requests
 from datetime import datetime
 from urllib.parse import urlparse
 
@@ -12,7 +13,7 @@ def check_tls(url):
     
         context = ssl.create_default_context()
         conn = context.wrap_socket (socket.socket(socket.AF_INET), server_hostname=hostname)
-
+        conn.settimeout(5)
         conn.connect ((hostname, 443))
 
         cert = conn.getpeercert()
@@ -42,9 +43,14 @@ def check_tls(url):
         if (now < valid_from or now > valid_to) :
             valid = False
             
-        tls_present = True
-        if urlparse(url).scheme != "https" :
-            tls_present = False
+        try:
+            r = requests.get(url, allow_redirects=True, timeout=10)
+            if r.history :
+                url = r.url
+        except requests.RequestException:
+            pass
+            
+        tls_present = urlparse(url).scheme == "https"
 
         conn.close()
     
