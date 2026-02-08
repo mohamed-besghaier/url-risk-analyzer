@@ -1,6 +1,6 @@
 import argparse
 import validators
-from engine import domain_checks, tls_checks, page_checks, score, explain
+from engine import domain_checks, tls_checks, page_checks, score
 from tabulate import tabulate
 
 def print_banner():
@@ -41,17 +41,13 @@ def main():
     tls_result = tls_checks.check_tls(url)
     
     risk_score = score.calculate_score(domain_result, tls_result, page_result)
-    explanation = explain.explain(
-        {"domain": domain_result, "tls": tls_result, "page": page_result},
-        risk_score
-    )
 
     # Output
     print("Findings:")
     print_dict_table(domain_result)
     print_dict_table(tls_result)
     print_dict_table(page_result)
-    print(explanation)
+    print_dict_table(risk_score)
 
 if __name__ == "__main__":
     main()

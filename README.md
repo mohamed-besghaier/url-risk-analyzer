@@ -8,7 +8,6 @@ A command-line security analysis tool that evaluates URLs for potential risks an
 - **TLS/SSL Verification**: Confirms valid SSL certificates and secure connections
 - **Page Content Inspection**: Detects login forms, external scripts, mixed content, and other security indicators
 - **Risk Scoring**: Calculates overall risk level based on multiple factors
-- **Detailed Explanations**: Provides clear, human-readable reasoning for risk assessments
 
 ## Installation
 
@@ -43,7 +42,6 @@ The tool will display:
 - TLS/SSL certificate validation
 - Page content analysis
 - Overall risk score (LOW / MEDIUM / HIGH)
-- Explanation of findings
 
 ## Project Structure
 
@@ -57,7 +55,6 @@ url-risk-analyzer/
 │   ├── tls_checks.py      # SSL/TLS certificate validation
 │   ├── page_checks.py     # Web page content inspection
 │   ├── score.py           # Risk scoring algorithm
-│   └── explain.py         # Risk explanation generation
 └── README.md              # This file
 ```
 
@@ -68,4 +65,3 @@ url-risk-analyzer/
 3. **TLS Verification**: Validates SSL certificate and secure connection
 4. **Page Analysis**: Scans page content for security indicators
 5. **Scoring**: Calculates risk score based on all findings
-6. **Explanation**: Generates human-readable summary of results

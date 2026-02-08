@@ -1,6 +1,6 @@
 def calculate_score(domain_result, tls_result, page_result):
-    # Very simple scoring logic for MVP
-    # Returns LOW / MEDIUM / HIGH
+    # Simple scoring logic for MVP
+    # Returns the score and LOW / MEDIUM / HIGH
     
     SAFE_REGISTRARS = [
         "MARKMONITOR",
@@ -55,9 +55,9 @@ def calculate_score(domain_result, tls_result, page_result):
         score += 5
                  
     if score < 40 :
-        return "HIGH", score
+        return {"risk" : "HIGH", "score" : score}
     
     if score < 70 :
-        return "MEDIUM", score
+        return {"risk" : "MEDIUM", "score" : score}
 
-    return "LOW", score
+    return {"risk" : "LOW", "score" : score}
