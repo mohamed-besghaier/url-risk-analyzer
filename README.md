@@ -1,6 +1,6 @@
 # URL Risk Analyzer
 
-A command-line security analysis tool that evaluates URLs for potential risks and provides human-readable explanations of findings. The analyzer checks domain reputation, TLS/SSL certificates, and page content to assign a risk score (LOW, MEDIUM, or HIGH).
+A command-line security analysis tool that evaluates URLs for potential risks. The analyzer checks domain reputation, TLS/SSL certificates, and page content to assign a risk score (LOW, MEDIUM, or HIGH).
 
 ## Features
 
